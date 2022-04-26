@@ -46,6 +46,8 @@ __all__ = [
     'ModelExportOp',
     'ModelUploadOp',
     'ModelImportEvaluationOp',
+    'DatasetSplitOp',
+    'DatasetSampleOp',
     'EndpointCreateOp',
     'EndpointDeleteOp',
     'TimeSeriesDatasetCreateOp',
@@ -188,3 +190,13 @@ ModelImportEvaluationOp = load_component_from_file(
     os.path.join(
         os.path.dirname(__file__),
         'model/evaluation/import_model_evaluation/component.yaml'))
+
+DatasetSplitOp = load_component_from_file(
+    os.path.join(
+        os.path.dirname(__file__),
+        'model/evaluation/data_splitter/component.yaml'))
+
+DatasetSampleOp = load_component_from_file(
+    os.path.join(
+        os.path.dirname(__file__),
+        'model/evaluation/data_sampler/component.yaml'))

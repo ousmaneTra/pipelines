@@ -1,0 +1,48 @@
+name: data_sampler
+description: |
+        Randomly downsamples an input dataset to a configurable amount and export it to compute
+        Vertex XAI feature attributions for AutoML Tables and custom models. Creates a Dataflow
+        job with Apache Beam to downsample the dataset.
+
+        Args:
+            project (str):
+                Project to retrieve dataset from.
+            location (Optional[str]):
+                Location to retrieve dataset from.
+                If not set, defaulted to `us-central1`.
+            dataset (google.VertexDataset):
+                Dataset to be downsampled.
+            sample_size (Optional[int]):
+                Maximum size to use in downsampling.
+        Returns:
+            downsampled_dataset (google.VertexDataset):
+                Downsampled dataset resource.
+inputs:
+- {name: project, type: String}
+- {name: location, type: String, default: "us-central1"}
+- {name: dataset, type: google.VertexDataset}
+- {name: sample_size, type: Integer, default: 10000}
+outputs:
+- {name: downsampled_dataset, type: google.VertexDataset}
+- {name: gcp_resources, type: String}
+implementation:
+  container:
+    image: gcr.io/model-evaluation-dev/evaluation-tests:cloud-build
+    command:
+    - python
+    - /main.py
+    args:
+    - --json_mode
+    - 'true'
+    - --task
+    - 'downsample'  # example of separate execution path inside Eval container
+    - --project_id
+    - {inputValue: project}
+    - --location
+    - {inputValue: location}
+    - --input_dataset
+    - "{{$.inputs.artifacts['dataset'].metadata['resourceName']}}"
+    - --gcp_resources
+    - {outputPath: gcp_resources}
+    - --executor_input
+    - '{{$}}'

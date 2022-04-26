@@ -1,0 +1,46 @@
+name: data_splitter
+description: |
+        Remove the Ground Truth columns from the input dataset for supporting
+        unstructured AutoML models in Batch Prediction. Creates a Dataflow job
+        with Apache Beam to remove the ground truth columns.
+
+        Args:
+            project (str):
+                Project to retrieve dataset from.
+            location (Optional[str]):
+                Location to retrieve dataset from.
+                If not set, defaulted to `us-central1`.
+            dataset (google.VertexDataset):
+                Dataset to be processed.
+        Returns:
+            bp_input_dataset (google.VertexDataset):
+                Dataset without the ground truth columns
+                as Batch Prediction input.
+inputs:
+- {name: project, type: String}
+- {name: location, type: String, default: "us-central1"}
+- {name: dataset, type: google.VertexDataset}
+outputs:
+- {name: bp_input_dataset, type: google.VertexDataset}
+- {name: gcp_resources, type: String}
+implementation:
+  container:
+    image: gcr.io/model-evaluation-dev/evaluation-tests:cloud-build
+    command:
+    - python
+    - /main.py
+    args:
+    - --json_mode
+    - 'true'
+    - --task
+    - 'split'  # example of separate execution path inside Eval container
+    - --project_id
+    - {inputValue: project}
+    - --location
+    - {inputValue: location}
+    - --input_dataset
+    - "{{$.inputs.artifacts['dataset'].metadata['resourceName']}}"
+    - --gcp_resources
+    - {outputPath: gcp_resources}
+    - --executor_input
+    - '{{$}}'
