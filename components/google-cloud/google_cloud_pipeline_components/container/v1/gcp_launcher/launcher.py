@@ -64,6 +64,8 @@ _JOB_TYPE_TO_ACTION_MAP = {
         bigquery_job_remote_runner.bigquery_export_model_job,
     'BigqueryEvaluateModelJob':
         bigquery_job_remote_runner.bigquery_evaluate_model_job,
+    'BigqueryMLArimaCoefficients':
+        bigquery_job_remote_runner.bigquery_ml_arima_coefficients,
     'DataprocPySparkBatch':
         dataproc_batch_remote_runner.create_pyspark_batch,
     'DataprocSparkBatch':
