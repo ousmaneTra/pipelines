@@ -26,6 +26,8 @@ __all__ = [
     'BigqueryExportModelJobOp',
     'BigqueryPredictModelJobOp',
     'BigqueryEvaluateModelJobOp',
+    'BigQueryMLReconstructionLossJobOp',
+    'BigQueryMLTrialInfoJobOp',
 ]
 
 BigqueryQueryJobOp = load_component_from_file(
@@ -42,4 +44,11 @@ BigqueryPredictModelJobOp = load_component_from_file(
         os.path.join(os.path.dirname(__file__), 'predict_model/component.yaml'))
 
 BigqueryEvaluateModelJobOp = load_component_from_file(
-        os.path.join(os.path.dirname(__file__), 'evaluate_model/component.yaml'))
+    os.path.join(os.path.dirname(__file__), 'evaluate_model/component.yaml'))
+
+BigQueryMLReconstructionLossJobOp = load_component_from_file(
+    os.path.join(
+        os.path.dirname(__file__), 'ml_reconstruction_loss/component.yaml'))
+
+BigQueryMLTrialInfoJobOp = load_component_from_file(
+    os.path.join(os.path.dirname(__file__), 'ml_trial_info/component.yaml'))
