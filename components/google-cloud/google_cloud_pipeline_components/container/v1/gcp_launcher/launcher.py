@@ -64,6 +64,8 @@ _JOB_TYPE_TO_ACTION_MAP = {
         bigquery_job_remote_runner.bigquery_export_model_job,
     'BigqueryEvaluateModelJob':
         bigquery_job_remote_runner.bigquery_evaluate_model_job,
+    'BigqueryMLRecommendJob':
+        bigquery_job_remote_runner.bigquery_ml_recommend_job,
     'DataprocPySparkBatch':
         dataproc_batch_remote_runner.create_pyspark_batch,
     'DataprocSparkBatch':
@@ -147,7 +149,7 @@ def _parse_args(args):
       type=str,
       required=(parsed_args.type in {
           'BigqueryPredictModelJob', 'BigqueryExportModelJob',
-          'BigQueryEvaluateModelJob'
+          'BigQueryEvaluateModelJob', 'BigqueryMLRecommendJob',
       }),
       default=argparse.SUPPRESS)
   parser.add_argument(
