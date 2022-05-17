@@ -26,6 +26,7 @@ __all__ = [
     'BigqueryExportModelJobOp',
     'BigqueryPredictModelJobOp',
     'BigqueryEvaluateModelJobOp',
+    'BigqueryMLFeatureImportanceJobOp'
 ]
 
 BigqueryQueryJobOp = load_component_from_file(
@@ -43,3 +44,6 @@ BigqueryPredictModelJobOp = load_component_from_file(
 
 BigqueryEvaluateModelJobOp = load_component_from_file(
         os.path.join(os.path.dirname(__file__), 'evaluate_model/component.yaml'))
+
+BigqueryMLFeatureImportanceJobOp = load_component_from_file(
+        os.path.join(os.path.dirname(__file__), 'feature_importance/component.yaml'))
