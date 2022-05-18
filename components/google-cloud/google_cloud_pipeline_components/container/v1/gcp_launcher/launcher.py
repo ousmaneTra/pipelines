@@ -64,6 +64,8 @@ _JOB_TYPE_TO_ACTION_MAP = {
         bigquery_job_remote_runner.bigquery_export_model_job,
     'BigqueryEvaluateModelJob':
         bigquery_job_remote_runner.bigquery_evaluate_model_job,
+    'BigqueryMLRocCurveJob':
+        bigquery_job_remote_runner.bigquery_ml_roc_curve_job,
     'DataprocPySparkBatch':
         dataproc_batch_remote_runner.create_pyspark_batch,
     'DataprocSparkBatch':
@@ -185,6 +187,14 @@ def _parse_args(args):
       # threshold is only needed for BigQuery tvf model job component.
       required=(parsed_args.type
                 in {'BigqueryPredictModelJob', 'BigQueryEvaluateModelJob'}),
+      default=argparse.SUPPRESS)
+  parser.add_argument(
+      '--thresholds',
+      dest='thresholds',
+      type=list[float],
+      # thresholds is only needed for BigQuery tvf model job component.
+      required=(parsed_args.type
+                in {'BigqueryMLRocCurveJob'}),
       default=argparse.SUPPRESS)
   parser.add_argument(
       '--batch_id',

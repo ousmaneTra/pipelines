@@ -26,6 +26,7 @@ __all__ = [
     'BigqueryExportModelJobOp',
     'BigqueryPredictModelJobOp',
     'BigqueryEvaluateModelJobOp',
+    'BigqueryMLRocCurveJobOp',
 ]
 
 BigqueryQueryJobOp = load_component_from_file(
@@ -43,3 +44,6 @@ BigqueryPredictModelJobOp = load_component_from_file(
 
 BigqueryEvaluateModelJobOp = load_component_from_file(
         os.path.join(os.path.dirname(__file__), 'evaluate_model/component.yaml'))
+
+BigqueryMLRocCurveJobOp = load_component_from_file(
+        os.path.join(os.path.dirname(__file__), 'ml_roc_curve/component.yaml'))
